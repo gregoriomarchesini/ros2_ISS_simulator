@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+  Gazebo ROS state plugin demo
+
+  Try for example to get a model's state w.r.t. the world:
+
+      ros2 service call /demo/get_entity_state 'gazebo_msgs/GetEntityState' '{name: "boxes"}'
+
+  Or a link's state w.r.t. the world:
+
+      ros2 service call /demo/get_entity_state 'gazebo_msgs/GetEntityState' '{name: "boxes::bottom", reference_frame: "world"}'
+
+  Or a light's state w.r.t. another entity:
+
+      ros2 service call /demo/get_entity_state 'gazebo_msgs/GetEntityState' '{name: "sun", reference_frame: "ground_plane"}'
+
+  > When setting state, note that the changes for static entities may not be visible on gzclient due to https://bitbucket.org/osrf/gazebo/issues/2560
+
+  Try teleporting a model:
+
+      ros2 service call /demo/set_entity_state 'gazebo_msgs/SetEntityState' '{state: {name: "boxes", pose: {position: {y: 2}}}}'
+
+  Or rotating a light:
+
+      ros2 service call /demo/set_entity_state 'gazebo_msgs/SetEntityState' '{state: {name: "sun", pose: {position: {z: 10}, orientation: {x: 0.1, y: 0.2, z: 0.3, w: 0.5}}}}'
+
+  Try teleporting a model:
+
+      ros2 service call /demo/set_entity_state 'gazebo_msgs/SetEntityState' '{state: {name: "boxes::top", reference_frame: "boxes::top", twist: {angular: {x: 2}}}}'
+
+  Try listening to model states:
+
+      ros2 topic echo /demo/model_states_demo
+
+  Try listening to link states:
+
+      ros2 topic echo /demo/link_states_demo
+-->
+<sdf version="1.6">
+  <world name="default">
+    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
+      <ros>
+        <namespace>/mocap_simulator</namespace>
+        <remapping>model_states:=model_states_mocap</remapping>  <!-- remap gazebo/model_states to /mocap_simulator/model_states : this is going to be a topic publsihed -->
+        <remapping>link_states:=link_states_mocap</remapping>
+      </ros>
+
+      <update_rate>100</update_rate>
+    </plugin>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <gravity>0</gravity>
+    <scene>
+  	<ambient>0 0 0 1</ambient>
+  	<background>0 0 0 1</background>
+  	<shadows>0</shadows>
+    </scene>
+    
+
+  </world>
+
+</sdf>
+
+<!--
+    The  <remapping>  tags are used to remap the topics that the plugin subscribes to and publishes to. In this case, the plugin subscribes to the  /gazebo/model_states  and  /gazebo/link_states  topics and publishes to the  /demo/model_states_demo  and  /demo/link_states_demo  topics. 
+    The  <update_rate>  tag specifies the rate at which the plugin updates the state information. 
+    The  <include>  tags are used to include the ground plane and sun models in the world. 
+    The  <uri>  tag specifies the path to the model. 
+    The  <world>  tag is used to define the world. 
+    The  <plugin>  tag is used to define the plugin. 
+    The  <ros>  tag is used to define the ROS parameters. 
+    The  <namespace>  tag is used to specify the namespace for the plugin. 
+    The  <remapping>  tags are used to remap the topics that the plugin subscribes to and publishes to. 
+    The  <update_rate>  tag specifies the rate at which the plugin updates the state information. 
+    The  <include>  tags are used to include the ground plane and sun models in the world. 
+    The  <uri>  tag specifies the path to the model. 
+    The  <world>  tag is used to define the world. 
+    The  <plugin>  tag is used to define the plugin. 
+    The  <ros>  tag is used to define the ROS parameters. 
+    The  <namespace>  tag is used to specify the namespace for the plugin. 
+    The  <remapping>  tags are used to remap the topics that the plugin subscribes to and publishes to. 
+    The  <update_rate>  tag specifies the rate at which the plugin updates the state information. 
+    The  <include>  tags are used to include the ground plane and sun models in the world. 
+    The  <uri>  tag specifies the path to the model. 
+    The  <world>  tag is used to define the world. 
+    The  <plugin>  tag is used to define the plugin. 
+    The  <ros>  tag is used to define the ROS parameters. 
+    The  <namespace>  tag is used to specify the namespace for the plugin. 
+    The  <remapping
+-->
