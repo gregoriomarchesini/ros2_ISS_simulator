@@ -34,6 +34,7 @@ For the passionate students here is a list of books and paper that will make you
 
 # Developers
 Gregorio Marchesini [gremar@kth.se](mailto:gremar@kth.se)
+
 Pedro Roque [padr@kth.se](padr@kth.se)
 
 
