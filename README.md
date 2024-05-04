@@ -67,6 +67,7 @@ Once you created the model appropriately, you can built the package again and yo
 
 # Developers
 Gregorio Marchesini [gremar@kth.se](mailto:gremar@kth.se)
+
 Pedro Roque [padr@kth.se](padr@kth.se)
 
 
