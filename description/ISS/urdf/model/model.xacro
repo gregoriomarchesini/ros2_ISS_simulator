@@ -1,18 +1,15 @@
 <?xml version="1.0"?>
-<robot name="iss" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="ISS" xmlns:xacro="http://ros.org/wiki/xacro">
   
   <xacro:property name="PI" value="3.1415926535897931" />
-  
+
   <link name="fixed_link"/>
-  
-  
   <link name="ISS">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 ${PI}" />
       <geometry>
-        <mesh filename="file://$(find iss_description)/description/meshes/ISS_2016.stl" scale="0.01 0.01 0.01"/>
+        <mesh filename="file://$(find simulator_ros2)/description/ISS/meshes/ISS_2016.stl" scale="0.01 0.01 0.01"/>
       </geometry>
-      <material name="yellow" />
     </visual>
     <inertial>
       <!-- Inertia from CAD model, filled box assumption -->
@@ -24,20 +21,9 @@
         izz="0.074201740"/>
     </inertial>
   </link>
-  
-
-  
   <joint name="fix_ISS" type="fixed">
       <parent link="fixed_link"/>
       <child link="ISS"/>
       <origin xyz="0 0 0" />
   </joint>
-  
-
-
-  
-  
-  
-  
-
 </robot>

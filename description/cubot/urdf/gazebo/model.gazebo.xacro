@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    
+    <gazebo>
+        <plugin name="relative_gravity_acc" filename="libcw_model_plugin.so">
+        <ros>
+            <namespace>/cubot</namespace>
+        </ros>
+
+        <!-- frame representing the center of mass of the body -->
+         <cog_link_name>cog_cubot</cog_link_name>      
+
+        <!-- in [kg] -->
+        <total_mass>10</total_mass>                   
+               
+         <!-- in [km]        (ISS example)  -->
+         <orbit_radius>67.78</orbit_radius>            
+               
+         <!-- in [km^3/s^2]  (Earth Example) (find for more planets at https://en.wikipedia.org/wiki/Standard_gravitational_parameter) -->
+        <gravity_parameter>398600</gravity_parameter>  
+        </plugin>
+    </gazebo>
+
+</robot>

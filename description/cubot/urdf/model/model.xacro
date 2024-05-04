@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot name="cubot" xmlns:xacro="http://ros.org/wiki/xacro">
+ 
+  <!-- Center of mass frame -->
+  <link name="com_frame"></link>
+  <!--Inertial frame containing all the parameters of the vehicle. Note that from the plugin the function GetLink can only get the parent link apparently -->
+  <link name="inertial_frame">
+    <visual>
+        <geometry>
+            <box size="1 1 1"/>
+        </geometry>
+    </visual>
+    <inertial>
+      <!-- Inertia from CAD model, filled box assumption -->
+      <origin xyz="0.01103 0 0.002" rpy="0 0 0"/>
+      <mass value="10.00"/>
+      <inertia
+        ixx="0.018819942" ixy="0" ixz="-0.000101519"
+        iyy="0.057333716" iyz="0"
+        izz="0.074201740"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_cog" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="com_frame"/>
+    <child link="inertial_frame"/>
+  </joint>
+
+  <gazebo>
+        <plugin name="relative_gravity_acc" filename="libcw_model_plugin.so">
+
+          <!-- frame representing the center of mass of the body -->
+          <com_link_name>com_frame</com_link_name>      
+
+          <!-- in [kg] -->
+          <total_mass>10</total_mass>                   
+                
+          <!-- in [km] (ISS example 6778)  -->
+          <orbit_radius>1335</orbit_radius>            
+                
+          <!-- in [km^3/s^2]  (Earth Example) (find for more planets at https://en.wikipedia.org/wiki/Standard_gravitational_parameter) -->
+          <gravity_parameter>398600</gravity_parameter>  
+        </plugin>
+   </gazebo>
+
+  <!-- <xacro:include filename="$(find iss_description)/description/cubot/urdf/gazebo/model.gazebo.xacro" /> -->
+
+</robot>

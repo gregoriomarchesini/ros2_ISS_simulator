@@ -8,8 +8,8 @@ import xacro
 def generate_launch_description():
 
     # Specify the name of the package and path to xacro file within the package
-    pkg_name = 'iss_description'
-    file_subpath = 'description/urdf/iss_model.xacro'
+    pkg_name = 'simulator_ros2'
+    file_subpath = 'description/urdf/models/iss_model.xacro'
 
 
     # Use xacro to process the file

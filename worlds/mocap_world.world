@@ -44,20 +44,31 @@
         <remapping>model_states:=model_states_mocap</remapping>  <!-- remap gazebo/model_states to /mocap_simulator/model_states : this is going to be a topic publsihed -->
         <remapping>link_states:=link_states_mocap</remapping>
       </ros>
-
       <update_rate>100</update_rate>
     </plugin>
+
+     <!-- Define scene parameters -->
+    <scene>
+      <ambient> 
+        <light>0.8 0.8 0.8 1</light> <!-- RGBA values for ambient light -->
+        <background>0.5 0.5 0.5 1</background> <!-- RGBA values for background color -->
+        <shadows>true</shadows> <!-- Enable/disable shadows -->
+      </ambient>
+    </scene>
+
 
     <include>
       <uri>model://sun</uri>
     </include>
+
     <gravity>0</gravity>
-    <scene>
-  	<ambient>0 0 0 1</ambient>
-  	<background>0 0 0 1</background>
-  	<shadows>0</shadows>
-    </scene>
     
+    <scene>
+      <ambient>0 0 0 1</ambient>
+      <background>0 0 0 1</background>
+      <shadows>0</shadows>
+    </scene>
+
 
   </world>
 

@@ -32,6 +32,39 @@ For the passionate students here is a list of books and paper that will make you
 - [Comprehensive survey and assessment of spacecraft relative motion dynamics models](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=428U9JQAAAAJ&citation_for_view=428U9JQAAAAJ:QsKbpXNoaWkC) 
 - [Information-Based Guidance and Control For On-orbit Inspection using Multiple Spacecraft.](https://www.researchgate.net/publication/344354258_Information-Based_Guidance_and_Control_For_On-orbit_Inspection_using_Multiple_Spacecraft)
 
+# Adding new models 
+The description of each model is given in the `description` folder. Each model has its own folder structure written as as
+
+```
+description
+├── cubot
+│   ├── meshes
+│   └── urdf
+│       ├── gazebo
+│       │   └── model.gazebo.xacro
+│       └── model
+│           └── model.xacro
+
+``` 
+- The `mesh` contains the mashes of the model to be spawned in gazebo
+- The `urdf` forlder (Universal Robot Description File) contains the folders `model` and `gazebo`. The `model` folder contains a single or multiple files of type `.xacro` from which  `model.xacro` is the main file to be be used for spawning. So the global model NEEDS to be defined in the  `model.xacro` which might import multiple other `.xacro` files at your will. The `gazebo` folder contains the `gazebo.xacro` files which are all the additional *gazebo specific* entries of the `model.xacro`. Usually this contains information about specific gazebo plugins or textures colors that require specific command to be set.
+
+```diff
+- It is very important that the `model.xacro` has the robot name set to be equal to the folder where the model is contained.
+```
+So if I have a model in the folder `description/ISS` then the `model.xacro` file has to be named `<robot name=ISS ...`. See for example
+
+```
+<?xml version="1.0"?>
+<robot name="ISS" xmlns:xacro="http://ros.org/wiki/xacro">
+  
+  <xacro:property name="PI" value="3.1415926535897931" />
+   ...
+
+```
+Once you created the model appropriately, you can built the package again and you should see your model among the found ones 
+
+
 # Developers
 Gregorio Marchesini [gremar@kth.se](mailto:gremar@kth.se)
 Pedro Roque [padr@kth.se](padr@kth.se)
